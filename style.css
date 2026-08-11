@@ -3124,3 +3124,84 @@ HERO PHOTO - Natural layers (no cropping)
     }
 
 }
+
+@media (max-width: 600px) {
+
+    .big-date-wrapper {
+        width: 100%;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 4px;
+    }
+
+    .big-date-number {
+        padding-left: 0;
+        padding-bottom: 20px;
+        font-size: 42px;
+    }
+
+    .big-date-line {
+        height: 45px;
+        padding-bottom: 0;
+    }
+
+    .big-date-text-group {
+        height: 45px;
+    }
+
+    .big-date-month {
+        font-size: 12px;
+    }
+
+    .big-date-year {
+        font-size: 18px;
+    }
+
+}
+
+/* =========================================
+   MOBILE COLORS FIX
+   Keep the same burgundy tone as desktop
+========================================= */
+
+@media (max-width: 600px) {
+
+    .reception-card::before,
+    .rsvp-card::before {
+        opacity: 0.15 !important;
+        mix-blend-mode: normal !important;
+    }
+
+}
+/* =========================================
+   FINAL MOBILE GUESTBOOK FLOWER FIX
+========================================= */
+
+@media (max-width: 600px) {
+
+    .guestbook-card {
+        position: relative !important;
+        overflow: hidden !important;
+    }
+
+    .guestbook-bg-image {
+        position: absolute !important;
+        width: 520px !important;
+        max-width: none !important;
+        height: auto !important;
+
+        left: -170px !important;
+        top: 80px !important;
+
+        transform: none !important;
+
+        z-index: 0 !important;
+        pointer-events: none !important;
+    }
+
+    .guestbook-card > *:not(.guestbook-bg-image) {
+        position: relative !important;
+        z-index: 1 !important;
+    }
+
+}
