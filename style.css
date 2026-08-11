@@ -3254,37 +3254,3 @@ HERO PHOTO - Natural layers (no cropping)
         left: -40px !important;
     }
 }
-
-/* =========================================================
-   MOBILE COLOR FIX (تفتيح اللون النبيتي للموبايل)
-========================================================= */
-
-@media (max-width: 600px) {
-
-    /* تفتيح لون الخلفية النبيتية الأساسية (الكارت الأحمر) */
-    .ceremony-bg,
-    .reception-card,
-    .rsvp-card,
-    .reception-card-new,
-    .ceremony-card {
-        background-color: #6b1c24 !important; /* ◄━━━ لون أغمق قليلاً لكنه أفتح من #511419 عشان يظهر بشكل أوضح */
-        /* أو لو حبيت تستخدم شفافية للصيانة: */
-        /* background-color: rgba(81, 20, 25, 0.9) !important; */
-    }
-
-    /* لو في مكان تاني بيستخدم نفس اللون كـ خلفية لكن بشكل صريح */
-    .ceremony-bg {
-        background-color: #6b1c24 !important;
-    }
-
-    /* ضبط لون النص عشان يظل واضح */
-    .ceremony-content .section-title.dark,
-    .reception-text,
-    .reception-names .reception-name,
-    .reception-names .reception-amp,
-    .rsvp-text,
-    .rsvp-btn {
-        color: #ece4d8 !important;
-    }
-
-}
