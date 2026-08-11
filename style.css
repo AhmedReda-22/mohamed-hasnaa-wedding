@@ -1,0 +1,2744 @@
+/* =========================================================
+   GOOGLE FONTS
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=EB+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Lora:wght@400;500;600&family=The+Nautigal:wght@400;700&display=swap');
+
+/* تحميل الخط DFVN New Eddy من الإنترنت مباشرة */
+@font-face {
+    font-family: 'DFVN New Eddy';
+    src: url('https://chungdoi.com/fonts/DFVN-NewEddy-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+        /* ◄━━━ حط مسار صورة القصر بتاعتك هنا */
+    background-image: url('images/Picture2.png'); 
+    
+    /* عشان الصورة تغطي الشاشة كلها وتكون في النص */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background: #fffaf3;
+    color: #511419;
+    font-family: "Lora", "Times New Roman", serif;
+}
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1; /* تحت كل المحتوى */
+    
+    /* نفس صورة القصر عشان نتحكم في شفافيتها وحدها */
+    background-image: url('images/Picture2.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    
+    /* ◄━━━ هنا التحكم في الشفافية (من 0 لـ 1). 0.15 يعني 15% */
+    opacity: 0.15; 
+    pointer-events: none; /* عشان المستخدم يقدر يضغط على الأزرار اللي فوقها */
+
+    opacity: var(--palace-opacity, 0.15); /* القيمة الافتراضية 15% */
+}
+
+
+/* =========================================================
+   OPENING SCREEN
+========================================================= */
+
+.opening-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #6e1a20, #511419, #380a0e);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.opening-screen.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   FLOATING HEARTS
+========================================================= */
+
+.floating-hearts {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.heart {
+    position: absolute;
+    top: -40px;
+    opacity: 0;
+    animation: falling-heart 10s ease-in-out infinite;
+    will-change: transform, opacity;
+}
+
+@keyframes falling-heart {
+    0% {
+        transform: translate3d(0, -40px, 0) rotate(0deg);
+        opacity: 0;
+    }
+    8% {
+        opacity: 0.7;
+    }
+    50% {
+        transform: translate3d(var(--sway, 20px), 50vh, 0) rotate(25deg);
+        opacity: 0.8;
+    }
+    85% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate3d(calc(var(--sway, 20px) * -0.5), 110vh, 0) rotate(-20deg);
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   ENVELOPE
+========================================================= */
+
+.envelope-wrapper {
+    position: relative;
+    z-index: 10;
+    width: min(600px, 92vw);
+}
+
+.envelope-card {
+    position: relative;
+    width: 100%;
+    min-height: 470px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: rgba(255, 250, 243, 0.97);
+    border: 1px solid rgba(81, 20, 25, 0.15);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.20);
+}
+
+
+/* =========================================================
+   WAX SEAL
+========================================================= */
+
+.wax-seal {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 52px;
+    height: 52px;
+    z-index: 30;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, #511419, #330000);
+    color: #f3e8de;
+    box-shadow: 0 4px 20px rgba(81, 20, 25, 0.5);
+    animation: seal-pulse 2s ease-in-out infinite;
+}
+
+.wax-seal svg {
+    fill: #f3e8de;
+    width: 26px;
+    height: 26px;
+}
+
+@keyframes seal-pulse {
+    0%,
+    100% {
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        transform: translateX(-50%) scale(1.06);
+    }
+}
+
+
+/* =========================================================
+   FLOWERS - Flag/Wind effect (base stays, tips move)
+========================================================= */
+
+.flower {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.75;
+    z-index: 5;
+}
+
+.flower img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Top Right Flower - facing inward (towards text) */
+.flower-top-right {
+    width: 180px;
+    height: 400px;
+    top: -450px;
+    right: -120px;
+    transform: rotate(25deg) scaleY(-1);
+    animation: float-flower-top 15s ease-in-out infinite;
+    transform-origin: bottom left;
+}
+
+/* Bottom Left Flower - facing outward (towards left) */
+.flower-bottom-left {
+    width: 180px;
+    height: 400px;
+    bottom: -50px;
+    left: 35px;
+    transform: rotate(205deg) scaleX(-1) scaleY(-1);
+    animation: float-flower-bottom 16s ease-in-out infinite;
+    transform-origin: top right;
+}
+
+/* Flower Floating Animations */
+@keyframes float-flower-top {
+    0% {
+        transform: rotate(22deg) scaleY(-1) scale(1) skewX(0deg) skewY(0deg);
+    }
+    25% {
+        transform: rotate(32deg) scaleY(-1) scale(1.04) skewX(-3deg) skewY(2deg);
+    }
+    50% {
+        transform: rotate(22deg) scaleY(-1) scale(0.98) skewX(2deg) skewY(-1deg);
+    }
+    75% {
+        transform: rotate(14deg) scaleY(-1) scale(1.02) skewX(-2deg) skewY(1.5deg);
+    }
+    100% {
+        transform: rotate(22deg) scaleY(-1) scale(1) skewX(0deg) skewY(0deg);
+    }
+}
+
+@keyframes float-flower-bottom {
+    0% {
+        transform: rotate(202deg) scaleX(-1) scaleY(-1) scale(1) skewX(0deg) skewY(0deg);
+    }
+    25% {
+        transform: rotate(212deg) scaleX(-1) scaleY(-1) scale(1.05) skewX(4deg) skewY(-2deg);
+    }
+    50% {
+        transform: rotate(197deg) scaleX(-1) scaleY(-1) scale(0.97) skewX(-3deg) skewY(2deg);
+    }
+    75% {
+        transform: rotate(207deg) scaleX(-1) scaleY(-1) scale(1.03) skewX(3deg) skewY(-1.5deg);
+    }
+    100% {
+        transform: rotate(202deg) scaleX(-1) scaleY(-1) scale(1) skewX(0deg) skewY(0deg);
+    }
+}
+
+
+/* =========================================================
+   INVITATION CONTENT
+========================================================= */
+
+.invitation-content {
+    position: relative;
+    z-index: 10;
+    min-height: 470px;
+    padding: 100px 24px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.couple-names {
+    margin-bottom: 6px;
+    color: #511419;
+    font-family: 'Great Vibes', 'EB Garamond', Georgia, serif;
+    font-size: clamp(36px, 6.5vw, 52px);
+    font-weight: 500;
+    line-height: 0.9;
+}
+
+.couple-names span {
+    display: block;
+}
+
+.couple-names .and {
+    margin: 6px 0;
+    font-family: 'The Nautigal', 'Baskerville', 'Times New Roman', serif;
+    font-size: 22px;
+}
+
+.ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.ornament span {
+    width: 35px;
+    height: 1px;
+}
+
+.ornament span:first-child {
+    background: linear-gradient(to right, transparent, #511419);
+}
+
+.ornament span:last-child {
+    background: linear-gradient(to left, transparent, #511419);
+}
+
+.ornament b {
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(81, 20, 25, 0.7);
+}
+
+.date {
+    margin-bottom: 12px;
+    font-size: 16px;
+    color: rgba(81, 20, 25, 0.72);
+}
+
+.invite-text {
+    margin-bottom: 18px;
+    font-size: 16px;
+    color: rgba(81, 20, 25, 0.72);
+}
+
+
+/* =========================================================
+   OPEN BUTTON
+========================================================= */
+
+.open-button {
+    position: relative;
+    overflow: hidden;
+    padding: 10px 34px;
+    border: none;
+    border-radius: 999px;
+    background: #511419;
+    color: #f3e8de;
+    font-family: "Lora", serif;
+    font-size: 17px;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(81, 20, 25, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.open-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(81, 20, 25, 0.45);
+}
+
+.open-button:active {
+    transform: translateY(0);
+}
+
+.open-button i {
+    position: absolute;
+    top: 0;
+    left: -40px;
+    width: 32px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+    0% {
+        left: -40px;
+    }
+    50% {
+        left: 110%;
+    }
+    100% {
+        left: 110%;
+    }
+}
+
+
+/* =========================================================
+   MUSIC BUTTON - Fixed on right
+========================================================= */
+
+.music-toggle {
+    position: fixed;
+    right: 24px;
+    top: 90%;
+    transform: translateY(-50%);
+    z-index: 999;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    background: rgba(81, 20, 25, 0.85);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.music-toggle:hover {
+    transform: translateY(-50%) scale(1.08);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.music-toggle .music-icon {
+    font-size: 22px;
+    color: #f3e8de;
+    transition: all 0.3s ease;
+}
+
+.music-toggle .wave-bars {
+    display: none;
+    gap: 3px;
+    align-items: center;
+    height: 28px;
+}
+
+.music-toggle .wave-bars span {
+    display: block;
+    width: 4px;
+    background: #f3e8de;
+    border-radius: 2px;
+    animation: wave-anim 1s ease-in-out infinite;
+}
+
+.music-toggle .wave-bars span:nth-child(1) {
+    height: 12px;
+    animation-delay: 0s;
+}
+.music-toggle .wave-bars span:nth-child(2) {
+    height: 20px;
+    animation-delay: 0.2s;
+}
+.music-toggle .wave-bars span:nth-child(3) {
+    height: 26px;
+    animation-delay: 0.4s;
+}
+.music-toggle .wave-bars span:nth-child(4) {
+    height: 20px;
+    animation-delay: 0.6s;
+}
+.music-toggle .wave-bars span:nth-child(5) {
+    height: 12px;
+    animation-delay: 0.8s;
+}
+
+@keyframes wave-anim {
+    0%,
+    100% {
+        transform: scaleY(0.4);
+    }
+    50% {
+        transform: scaleY(1);
+    }
+}
+
+.music-toggle.playing .music-icon {
+    display: none;
+}
+
+.music-toggle.playing .wave-bars {
+    display: flex;
+}
+
+.music-toggle.paused .music-icon {
+    display: block;
+}
+
+.music-toggle.paused .wave-bars {
+    display: none;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+
+.main-content {
+    display: none;
+}
+
+.main-content.show {
+    display: block;
+}
+
+
+/* =========================================================
+WEDDING INTRO
+========================================================= */
+
+.wedding-intro {
+    min-height: 100vh;
+    padding: 100px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: transparent !important; 
+    color: #511419;
+}
+
+.wedding-title {
+    margin-bottom: 100px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-family: "Cormorant Garamond", "Times New Roman", serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(89, 3, 16);
+}
+
+/* =========================================================
+HERO PHOTO - Natural layers (no cropping)
+========================================================= */
+
+.hero-photo-placeholder {
+    position: relative;
+    width: min(380px, 90vw);
+    height: auto;
+    aspect-ratio: 3/4;
+    margin: 0 auto 45px;
+    overflow: visible; /* عشان الصور تظهر بره الحاوية */
+    background: transparent !important;
+    border: none;
+}
+
+/* =========================================================
+   HERO PHOTO - Envelope Layers (Matching your image)
+========================================================= */
+
+.hero-photo-placeholder {
+    position: relative;
+    width: min(400px, 90vw);
+    height: auto;
+    aspect-ratio: 4/5; /* شكل مستطيل مناسب للظرف */
+    margin: 0 auto 45px;
+    overflow: visible;
+    background: transparent !important;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* كل الصور بتتحكم في موقعها من مركز الحاوية */
+.hero-photo-placeholder img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    pointer-events: none;
+    object-fit: contain;
+}
+
+/* ===================================
+   الطبقة 1: صورة خلفية الظرف (القاعدة)
+=================================== */
+.hero-layer-back {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+
+/* ===================================
+   الطبقة 2: صورة العروسين (مترحلة يمين + مائلة)
+=================================== */
+.hero-layer-couple {
+    z-index: 2;
+    width: 65%;
+    height: auto;
+    opacity: 1;
+    border: 4px solid white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border-radius: 4px;
+    
+    /* هنا بنخزن الإعدادات الأساسية بتاعتك */
+    --x: -30%;
+    --y-start: -50%;
+    --rot: 15deg; /* ميلان الصورة 15 درجة */
+    
+    transform: translate(var(--x), var(--y-start)) rotate(var(--rot));
+    animation: float-up-down 5s ease-in-out infinite;
+}
+
+/* ===================================
+   الطبقة 3: الوردة (مترحلة شمال + مائلة)
+=================================== */
+.hero-layer-flower {
+    z-index: 3;
+    width: 45%;
+    height: auto;
+    opacity: 1;
+    
+    /* هنا بنخزن الإعدادات الأساسية بتاعتك */
+    --x: -120%;
+    --y-start: -65%;
+    --rot: -15deg; /* ميلان الوردة 15- درجة */
+    
+    transform: translate(var(--x), var(--y-start)) rotate(var(--rot));
+    animation: float-up-down 9s ease-in-out infinite reverse;
+}
+
+/* ===================================
+   الطبقة 4: قفلة الظرف (الغطاء الأمامي)
+=================================== */
+.hero-layer-cover {
+    z-index: 4;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    /* هنا نزلها لتحت شوية عشان تظهر الصورة من فوق */
+    /* القيمة 40% تعني أنها ساقطة لتحت 40% من ارتفاع الصورة */
+    transform: translate(-50%, -30%); 
+}
+
+
+/* =========================================================
+   ANIMATIONS - Floating Up & Down (Preserving Rotate)
+========================================================= */
+
+@keyframes float-up-down {
+    0% {
+        transform: translate(var(--x), var(--y-start)) rotate(var(--rot));
+    }
+    50% {
+        /* بنقص 8% من المحور الرأسي عشان يطلع لفوق */
+        transform: translate(var(--x), calc(var(--y-start) - 8%)) rotate(var(--rot));
+    }
+    100% {
+        transform: translate(var(--x), var(--y-start)) rotate(var(--rot));
+    }
+}
+
+
+
+
+
+.intro-names {
+    margin-bottom: 30px;
+    font-family: 'Great Vibes', 'EB Garamond', Georgia, serif;
+    font-size: clamp(55px, 10vw, 90px);
+    font-weight: 400;
+    line-height: 0.8;
+}
+
+/* =========================================================
+   CEREMONY CARD (Reception Section)
+========================================================= */
+
+.reception-section {
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ceremony-card {
+    position: relative;
+    max-width: 700px;
+    width: 100%;
+    border-radius: 16px;
+    padding: 40px 40px 50px;
+    text-align: center;
+    box-shadow: 4px 8px 30px rgba(0, 0, 0, 0.4);
+    overflow: visible; 
+    min-height: 400px;
+    
+    /* ◄━━━ السطر الأهم: الخلفية الحمراء الصافية */
+    background: rgb(81, 20, 25) !important; 
+}
+
+/* Background Red Layer - ضمان إن اللون يغطي الكارت بالكامل */
+.ceremony-bg {
+    background-color: rgb(81, 20, 25);
+    z-index: 1;
+}
+
+/* Paper Texture Overlay */
+.ceremony-paper {
+    object-fit: cover;
+    z-index: 2;
+}
+
+/* =========================================================
+   CEREMONY CONTENT & TEXT
+========================================================= */
+
+.ceremony-content {
+    position: relative;
+    z-index: 10;
+}
+
+.ceremony-content .section-title.dark {
+    color: #ece4d8;
+    font-family: "Times New Roman", serif;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.ceremony-text {
+    font-size: 16px;
+    line-height: 2;
+    color: #ece4d8;
+    font-family: Baskerville, "Times New Roman", serif;
+    max-width: 560px;
+    margin: 0 auto;
+    opacity: 0.95;
+}
+
+.ceremony-names-wrapper {
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.ceremony-name {
+    font-size: 50px;
+    line-height: 1.1;
+    font-family: "EB Garamond", serif;
+    color: #ece4d8;
+    width: 80%;
+    min-height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    white-space: nowrap;
+}
+
+.ceremony-amp-symbol {
+    font-size: 40px;
+    color: #ece4d8;
+    font-family: 'The Nautigal', 'Baskerville', 'Times New Roman', serif;
+    line-height: 1;
+    margin: 2px 0;
+    opacity: 0.8;
+}
+
+/* =========================================================
+   FLOWER ON THE RIGHT - Swing Animation
+========================================================= */
+
+.ceremony-flower {
+    position: absolute;
+    z-index: 20;
+    pointer-events: none;
+    width: 220px;
+    height: auto;
+    object-fit: contain;
+    opacity: 1;
+    
+    /* المكان الأساسي (البداية) */
+    top: -40px;
+    right: -80px;
+    
+    /* الحركة: 4 ثواني، ناعمة، ومستمرة */
+    animation: flower-swing 10s ease-in-out infinite;
+}
+
+/* =========================================================
+   ANIMATION KEYFRAMES
+========================================================= */
+
+@keyframes flower-swing {
+    0% {
+        /* المكان الأساسي */
+        transform: translate(0, 0) rotate(0deg);
+    }
+    30% {
+        /* بيطلع لفوق شوية ويميل يمين (بيتحرك يمين 20px) */
+        transform: translate(20px, -30px) rotate(8deg);
+    }
+    60% {
+        /* بينزل لتحت ويرجع مكانه الأساسي (شمال) */
+        transform: translate(-10px, 20px) rotate(-4deg);
+    }
+    100% {
+        /* يرجع بالضبط للمكان الأساسي */
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+/* =========================================================
+   RESPONSIVE (للموبايل)
+========================================================= */
+
+@media (max-width: 600px) {
+    .ceremony-card {
+        max-width: 95%;
+        padding: 40px 20px 35px;
+        min-height: 300px;
+    }
+    
+    .ceremony-content .section-title.dark {
+        font-size: 18px;
+    }
+    
+    .ceremony-text {
+        font-size: 13px;
+    }
+    
+    .ceremony-name {
+        font-size: 38px;
+        width: 90%;
+    }
+    
+    .ceremony-amp-symbol {
+        font-size: 28px;
+    }
+
+    .ceremony-flower {
+        width: 140px;
+        top: -20px;
+        right: -40px;
+    }
+}
+
+
+.intro-names span {
+    display: block;
+}
+
+.intro-and {
+    margin: 15px 0;
+    font-family: 'The Nautigal', 'Baskerville', 'Times New Roman', serif;
+    font-size: 32px;
+}
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title {
+    text-align: center;
+    font-family: "Times New Roman", serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #511419;
+}
+
+.section-title.dark {
+    color: #ece4d8;
+}
+
+
+/* =========================================================
+   PHOTO GALLERY
+========================================================= */
+
+.gallery-section {
+    padding: 60px 20px 70px;
+    position: relative;
+    overflow: hidden;
+    background: transparent !important;
+}
+
+
+.gallery-container {
+    position: relative;
+    max-width: 750px;
+    margin: 35px auto 0;
+    height: 480px;
+    perspective: 1200px;
+    overflow: hidden;
+}
+
+
+.gallery-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.gallery-card {
+    position: absolute;
+    width: min(330px, 58%);
+    aspect-ratio: 3/4;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.28);
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+
+.gallery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.gallery-card.center {
+    transform: translateX(0%) translateZ(0px) rotateY(0deg) scale(1);
+    opacity: 1;
+    z-index: 100;
+}
+
+
+.gallery-card.right {
+    transform: translateX(68%) translateZ(-170px) rotateY(45deg) scale(0.85);
+    opacity: 0.75;
+    z-index: 99;
+}
+
+
+.gallery-card.right-far {
+    transform: translateX(135%) translateZ(-330px) rotateY(90deg) scale(0.7);
+    opacity: 0.5;
+    z-index: 98;
+}
+
+
+.gallery-card.left {
+    transform: translateX(-68%) translateZ(-170px) rotateY(-45deg) scale(0.85);
+    opacity: 0.75;
+    z-index: 99;
+}
+
+
+.gallery-card.left-far {
+    transform: translateX(-135%) translateZ(-330px) rotateY(-90deg) scale(0.7);
+    opacity: 0.5;
+    z-index: 98;
+}
+
+
+.gallery-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 200;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.gallery-nav:hover {
+    background: rgba(0, 0, 0, 0.7);
+    transform: translateY(-50%) scale(1.08);
+}
+
+
+.gallery-nav.prev {
+    left: 12px;
+}
+
+
+.gallery-nav.next {
+    right: 12px;
+}
+
+
+.gallery-dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 18px;
+}
+
+
+.gallery-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(81, 20, 25, 0.25);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 0;
+}
+
+
+.gallery-dot.active {
+    width: 26px;
+    border-radius: 5px;
+    background: #511419;
+}
+
+
+
+/* =========================================================
+   RECEPTION
+========================================================= */
+
+.reception-section {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.reception-card {
+    max-width: 420px;
+    width: 100%;
+    background: #511419;
+    border-radius: 13px;
+    padding: 36px 24px 32px;
+    text-align: center;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.reception-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://chungdoi.com/images/themes/minimalism-dark-red/paper.webp');
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+.reception-card>* {
+    position: relative;
+    z-index: 2;
+}
+
+.reception-text {
+    color: #ece4d8;
+    font-size: 13px;
+    line-height: 1.8;
+    margin: 12px 0 20px;
+    font-family: Baskerville, "Times New Roman", serif;
+}
+
+.reception-names {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin: 16px 0;
+}
+
+.reception-name {
+    color: #ece4d8;
+    font-family: "EB Garamond", serif;
+    font-size: 34px;
+}
+
+.reception-amp {
+    color: #ece4d8;
+    font-size: 28px;
+    font-family: Baskerville, serif;
+}
+
+.reception-details {
+    color: #ece4d8;
+    margin: 16px 0 20px;
+}
+
+.reception-day {
+    font-size: 13px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    letter-spacing: 2px;
+}
+
+.reception-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 8px 0;
+}
+
+.reception-day-num {
+    font-size: 40px;
+    font-family: "Times New Roman", serif;
+}
+
+.reception-month {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.reception-year {
+    font-size: 18px;
+}
+
+.reception-time {
+    font-size: 18px;
+    letter-spacing: 2px;
+    opacity: 0.7;
+}
+
+.add-calendar-btn {
+    background: transparent !important; 
+    color: #511419;
+    border: none;
+    padding: 10px 28px;
+    border-radius: 999px;
+    font-family: Baskerville, serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.3s;
+    margin-top: 8px;
+}
+
+.add-calendar-btn:hover {
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   RSVP
+========================================================= */
+
+.rsvp-section {
+    padding: 20px 20px 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.rsvp-card {
+    max-width: 420px;
+    width: 100%;
+    background: #511419;
+    border-radius: 13px;
+    padding: 36px 24px 32px;
+    text-align: center;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.rsvp-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('https://chungdoi.com/images/themes/minimalism-dark-red/paper.webp');
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+.rsvp-card>* {
+    position: relative;
+    z-index: 2;
+}
+
+.rsvp-text {
+    color: #ece4d8;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 10px 0 24px;
+    font-family: Baskerville, serif;
+}
+
+.rsvp-btn {
+    background: transparent !important; 
+    color: #511419;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 999px;
+    font-family: Baskerville, serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s;
+    letter-spacing: 1px;
+}
+
+.rsvp-btn:hover {
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+    MAP
+========================================================= */
+
+.map-section {
+    padding: 30px 20px 50px;
+    text-align: center;
+}
+
+.map-address {
+    color: rgba(81, 20, 25, 0.8);
+    font-family: Baskerville, serif;
+    font-size: 14px;
+    margin: 8px 0 16px;
+}
+
+.map-container {
+    max-width: 560px;
+    margin: 0 auto;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid #511419;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 320px;
+    border: none;
+}
+
+
+/* =========================================================
+   GUESTBOOK (الصورة ماشية بحجمها الطبيعي بره الكارت)
+========================================================= */
+
+.guestbook-section {
+    padding: 30px 20px 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent !important;
+}
+
+.guestbook-wrapper {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* الكارت الأساسي */
+.guestbook-card {
+    position: relative;
+    border-radius: 20px;
+    padding: 40px 30px 50px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    min-height: 380px;
+    background-color: #fdf9f4;
+    overflow: visible !important; /* ◄━━━ عشان الصورة تخرج بره */
+    z-index: 1;
+}
+
+/* صورة الخلفية كـ عنصر مطلق مش باك جراوند */
+.guestbook-bg-image {
+    position: absolute;
+    top: -30%;
+    left: 0;
+    transform: translateY(-70%);
+    transform: translateX(-15%);
+    width: 700px; /* نفس الحجم اللي أنت حطيته */
+    height: 660px;
+    object-fit: contain; /* عشان الصورة تحافظ على أبعادها */
+    pointer-events: none;
+    z-index: -1; /* تحت الكلام */
+}
+
+/* العنوان GUESTBOOK */
+.guestbook-title {
+    text-align: center;
+    font-family: "Times New Roman", serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #511419;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 2;
+}
+
+/* الفورم */
+.guestbook-form {
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* الحقول (Inputs) */
+.guestbook-form input,
+.guestbook-form textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1px solid #511419;
+    border-radius: 12px;
+    font-family: "Times New Roman", serif;
+    font-size: 15px;
+    background: transparent;
+    color: #511419;
+    margin-bottom: 16px;
+    transition: border-color 0.3s;
+}
+
+.guestbook-form input:focus,
+.guestbook-form textarea:focus {
+    outline: none;
+    border-color: #a8323b;
+}
+
+.guestbook-form textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+/* الأزرار تحت */
+.guestbook-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-top: 4px;
+    position: relative;
+    z-index: 2;
+}
+
+/* زر العصا السحرية (على الشمال) */
+.ai-wish-btn {
+    background: rgba(81, 20, 25, 0.08);
+    border: none;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 22px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    color: #511419;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* ◄━━━ حركنا الزرار يمين شوية عشان يبعد عن الوردة */
+    margin-left: 40px; 
+}
+
+.ai-wish-btn:hover {
+    background: rgba(81, 20, 25, 0.18);
+    transform: scale(1.1);
+}
+/* زر SEND WISHES (على اليمين) */
+.send-wish-btn {
+    background: #511419;
+    color: #fff;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 999px;
+    font-family: Baskerville, serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s;
+    letter-spacing: 1px;
+}
+
+.send-wish-btn:hover {
+    transform: scale(1.05);
+}
+
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+    .guestbook-wrapper {
+        max-width: 100%;
+    }
+    .guestbook-card {
+        padding: 30px 20px 40px;
+        min-height: 320px;
+    }
+    .guestbook-title {
+        font-size: 20px;
+        margin-bottom: 24px;
+    }
+    .guestbook-form textarea {
+        min-height: 100px;
+    }
+    .ai-wish-btn {
+        padding: 10px 14px;
+        font-size: 18px;
+    }
+    .send-wish-btn {
+        padding: 12px 24px;
+        font-size: 13px;
+    }
+    .guestbook-bg-image {
+        width: 100% !important;
+        height: auto !important;
+        left: -20px !important; /* عشان الوردة تظهر في الموبايل */
+    }
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.invitation-footer {
+    text-align: center;
+    padding: 30px 20px 40px;
+    background: #fffaf3;
+}
+
+.footer-message {
+    color: #511419;
+    font-family: "Times New Roman", serif;
+    font-size: 13px;
+}
+
+.footer-brand {
+    display: inline-block;
+    margin-top: 12px;
+    color: #511419;
+    font-size: 12px;
+    opacity: 0.5;
+    text-decoration: none;
+    transition: opacity 0.3s;
+}
+
+.footer-brand:hover {
+    opacity: 0.8;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+    .envelope-wrapper {
+        width: 94vw;
+    }
+    .envelope-card {
+        min-height: 430px;
+        border-radius: 10px;
+    }
+    .invitation-content {
+        min-height: 430px;
+        padding: 90px 18px 35px;
+    }
+    .wax-seal {
+        top: 30px;
+        width: 44px;
+        height: 44px;
+    }
+    .wax-seal svg {
+        width: 22px;
+        height: 22px;
+    }
+    .flower-top-right {
+        width: 130px;
+        height: 220px;
+        top: -40px;
+        right: -40px;
+    }
+    .flower-bottom-left {
+        width: 130px;
+        height: 220px;
+        bottom: -40px;
+        left: -40px;
+    }
+    .couple-names {
+        font-size: 30px;
+    }
+    .couple-names .and {
+        font-size: 18px;
+    }
+    .date,
+    .invite-text {
+        font-size: 14px;
+    }
+    .open-button {
+        font-size: 15px;
+        padding: 8px 26px;
+    }
+    .music-toggle {
+        right: 12px;
+        width: 44px;
+        height: 44px;
+    }
+    .music-toggle .music-icon {
+        font-size: 18px;
+    }
+    .music-toggle .wave-bars {
+        height: 22px;
+        gap: 2.5px;
+    }
+    .music-toggle .wave-bars span {
+        width: 3px;
+    }
+    .wedding-intro {
+        padding: 80px 18px;
+    }
+    .hero-photo-placeholder {
+        width: 260px;
+        height: 350px;
+    }
+    .intro-names {
+        font-size: 60px;
+    }
+    .announcement {
+        font-size: 13px;
+    }
+    .wedding-date {
+        gap: 10px;
+    }
+    .wedding-date .day {
+        font-size: 45px;
+    }
+    .wedding-date .month,
+    .wedding-date .year {
+        font-size: 14px;
+    }
+    .countdown {
+        gap: 20px;
+    }
+    .gallery-container {
+        height: 300px;
+    }
+    .gallery-card {
+        width: min(180px, 55%);
+    }
+    .gallery-nav {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+    .reception-name {
+        font-size: 28px;
+    }
+    .reception-day-num {
+        font-size: 32px;
+    }
+    .guestbook-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .send-wish-btn {
+        width: 100%;
+        text-align: center;
+    }
+    .map-container iframe {
+        height: 220px;
+    }
+    .gift-qr {
+        width: 130px;
+        height: 130px;
+    }
+}
+
+@media (max-width: 400px) {
+    .envelope-card {
+        min-height: 380px;
+    }
+    .invitation-content {
+        min-height: 380px;
+        padding: 80px 14px 28px;
+    }
+    .couple-names {
+        font-size: 26px;
+    }
+    .flower-top-right {
+        width: 100px;
+        height: 170px;
+        top: -30px;
+        right: -30px;
+    }
+    .flower-bottom-left {
+        width: 100px;
+        height: 170px;
+        bottom: -30px;
+        left: -30px;
+    }
+}
+/* =========================================================
+   WAX SEAL - Burst animation
+========================================================= */
+
+.wax-seal.burst {
+    animation: seal-burst 0.8s ease-out forwards !important;
+}
+
+@keyframes seal-burst {
+    0% {
+        transform: translateX(-50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    30% {
+        transform: translateX(-50%) scale(1.3) rotate(10deg);
+        opacity: 1;
+        box-shadow: 0 0 60px rgba(81, 20, 25, 0.8);
+    }
+    60% {
+        transform: translateX(-50%) scale(1.5) rotate(-5deg);
+        opacity: 0.8;
+        box-shadow: 0 0 80px rgba(81, 20, 25, 0.6);
+    }
+    100% {
+        transform: translateX(-50%) scale(0) rotate(20deg);
+        opacity: 0;
+        box-shadow: 0 0 100px rgba(81, 20, 25, 0);
+    }
+}
+
+
+/* =========================================================
+   BURST HEARTS - Flying out from seal
+========================================================= */
+
+.burst-heart {
+    position: fixed;
+    z-index: 999;
+    pointer-events: none;
+    font-size: 20px;
+    opacity: 0;
+    animation: burst-fly 1.2s ease-out forwards;
+}
+
+@keyframes burst-fly {
+    0% {
+        transform: translate(-50%, -50%) scale(0) rotate(0deg);
+        opacity: 1;
+    }
+    20% {
+        transform: translate(var(--dx1), var(--dy1)) scale(1.3) rotate(var(--rot1));
+        opacity: 1;
+    }
+    50% {
+        transform: translate(var(--dx2), var(--dy2)) scale(1.1) rotate(var(--rot2));
+        opacity: 0.9;
+    }
+    80% {
+        transform: translate(var(--dx3), var(--dy3)) scale(0.8) rotate(var(--rot3));
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(var(--dx4), var(--dy4)) scale(0.3) rotate(var(--rot4));
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   ENVELOPE - Shrink/close effect
+========================================================= */
+
+.envelope-wrapper.closing {
+    animation: envelope-close 0.8s ease-in forwards;
+}
+
+@keyframes envelope-close {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    40% {
+        transform: scale(0.95) rotate(-1deg);
+        opacity: 0.9;
+    }
+    100% {
+        transform: scale(0.7) rotate(2deg);
+        opacity: 0;
+    }
+}
+
+/* =========================================================
+   RECEPTION CARD - FLOWER & BUTTON
+========================================================= */
+
+/* الكارت نفسه لازم يكون overflow: visible عشان الوردة تطلع بره */
+.reception-card {
+    overflow: visible !important;
+    max-width: 700px !important;
+    width: 100% !important;
+    position: relative !important;
+    z-index: 1;
+}
+
+/* الوردة - طالعة بره الكارت بالكامل ومعلقة على الشمال */
+.reception-flower {
+    position: absolute !important;
+    pointer-events: none !important;
+    z-index: 20 !important;
+    
+    /* الحجم */
+    width: 300px !important;
+    height: auto !important;
+    
+    /* المكان الأساسي: بره الكارت خالص على الشمال */
+    left: -120px !important;
+    top:60px !important;
+    
+    /* ◄━━━ هنا التعديل المهم: شيلنا !important عشان الحركة تشتغل */
+    /* بنحدد المكان الأساسي بس من غير مهم */
+    transform: translateY(0) rotate(-10deg);
+    
+    /* الحركة (بتاخد 10 ثواني وتتحرك ناعم) */
+    animation: float-flower 6s ease-in-out infinite;
+}
+
+/* =========================================================
+   حركة الوردة (تعمل فوق وتحت)
+========================================================= */
+
+@keyframes float-flower {
+    0% {
+        transform: translateY(0) rotate(-10deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(-5deg);
+    }
+    100% {
+        transform: translateY(0) rotate(-10deg);
+    }
+}
+
+/* زر Confirm Attendance - شيب أكبر وحواف مدورة نضيفة */
+.reception-confirm-btn {
+    padding: 14px 40px !important;
+    font-size: 15px !important;
+    border-radius: 999px !important;
+    letter-spacing: 1px !important;
+    min-width: 200px !important;
+}
+
+.reception-confirm-btn:hover {
+    transform: scale(1.05) !important;
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+    .reception-flower {
+        width: 150px !important;
+        left: -80px !important; /* في الموبايل برضه بره الكارت */
+        top: 20px !important;
+    }
+}
+
+
+/* =========================================================
+   CALENDAR ONLY - FINAL ADJUSTMENTS (نضيف ومتناسق)
+========================================================= */
+
+.calendar-box {
+    width: 340px !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    box-sizing: border-box !important;
+    border-radius: 16px !important; /* ◄━━━ حواف الكاليندر مدورة */
+    padding: 20px 16px 20px !important; /* ◄━━━ زودنا البادينج جوا */
+    padding-bottom: 20px !important;
+}
+
+.calendar-box > table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    table-layout: fixed !important;
+}
+
+/* خط فاصل سميك ونضيف بين أيام الأسبوع والتاريخ */
+.calendar-box > table > thead > tr {
+    border-bottom: 2px solid #511419 !important;
+}
+
+.calendar-box > table > thead > tr > th {
+    height: 32px !important;
+    padding: 4px 0 !important;
+    font-size: 10px !important;
+    font-weight: 400 !important;
+}
+
+.calendar-box > table > tbody > tr > td {
+    height: 40px !important;
+    padding: 6px 0 !important;
+    font-size: 13px !important;
+    position: relative !important;
+}
+
+/* القلب في يوم 12 - مظبوط وسط الخلية */
+.calendar-box > table > tbody > tr > td > div {
+    width: 26px !important;
+    height: 24px !important;
+}
+
+.calendar-box > table > tbody > tr > td > div > span {
+    font-size: 11px !important;
+}
+
+/* =========================================================
+   FIX: PADDING FOR LINK & BUTTON
+========================================================= */
+
+/* نضمن إن الرابط ياخد مساحة فوق وتحت */
+.reception-calendar-link {
+    display: inline-block !important;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+}
+
+/* نضمن إن الزر ياخد مساحة فوق وتحت */
+.reception-confirm-btn {
+    display: inline-block !important;
+    padding-top: 25px !important;
+    padding-bottom: 25px !important;
+}
+
+@media (max-width: 600px) {
+    .calendar-box {
+        width: 320px !important;
+        padding: 16px 12px 16px !important;
+    }
+
+    .calendar-box > table > tbody > tr > td {
+        height: 36px !important;
+        font-size: 12px !important;
+    }
+
+    .reception-flower {
+        width: 150px !important;
+        left: -80px !important; /* للموبايل بتطلع بره كمان */
+        top: 30px !important;
+    }
+
+    .reception-confirm-btn {
+        padding: 12px 30px !important;
+        font-size: 13px !important;
+        min-width: 160px !important;
+    }
+}
+
+
+/* =========================================================
+   BIG DATE STYLES (الجزء اللي فيه 12 والخط والتاريخ)
+========================================================= */
+
+/* الحاوية الأساسية */
+.big-date-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-top: 4px;
+    color: rgb(236, 228, 216);
+    font-family: 'Times New Roman', serif;
+}
+
+/* رقم 12 كبير */
+.big-date-number {
+    font-size: 48px;
+    line-height: 1;
+    padding-left: 220px;
+    padding-bottom: 20px;
+    font-weight: normal;
+    letter-spacing: -1px;
+    color: rgb(236, 228, 216);
+    font-family: 'Times New Roman', serif;
+}
+
+/* الخط الطولي */
+.big-date-line {
+    width: 1px;
+    height: 50px;
+    padding-bottom: 40px;
+    background-color: rgba(236, 228, 216, 0.4);
+}
+
+/* الحاوية اللي فيها الشهر فوق والسنة تحت */
+.big-date-text-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 50px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+/* الشهر فوق */
+.big-date-month {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1;
+    color: rgb(236, 228, 216);
+    font-family: 'Times New Roman', serif;
+}
+
+/* السنة تحت */
+.big-date-year {
+    font-size: 20px;
+    line-height: 1;
+    color: rgb(236, 228, 216);
+    font-family: 'Times New Roman', serif;
+}
+
+/* =========================================================
+   MOBILE RESPONSIVE
+========================================================= */
+
+@media (max-width: 600px) {
+    .big-date-number {
+        font-size: 40px;
+    }
+    .big-date-line {
+        height: 44px;
+    }
+    .big-date-text-group {
+        height: 44px;
+    }
+    .big-date-month {
+        font-size: 11px;
+    }
+    .big-date-year {
+        font-size: 17px;
+    }
+}
+
+
+/* =========================================================
+   RSVP MODAL
+========================================================= */
+
+.rsvp-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+
+/* Modal Open */
+
+.rsvp-modal.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/* Background */
+
+.rsvp-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(20, 20, 20, 0.45);
+
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+
+/* Main Box */
+
+.rsvp-box {
+    position: relative;
+
+    width: min(90%, 440px);
+
+    background: #ffffff;
+
+    border-radius: 22px;
+
+    padding: 28px 20px 20px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.22);
+
+    transform: translateY(25px) scale(0.96);
+
+    transition:
+        transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+
+/* Animation */
+
+.rsvp-modal.active .rsvp-box {
+    transform: translateY(0) scale(1);
+}
+
+
+/* Close */
+
+.rsvp-close {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    width: 34px;
+    height: 34px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f3f4f6;
+
+    color: #7b8190;
+
+    font-size: 24px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s ease;
+}
+
+.rsvp-close:hover {
+    background: #e8e9ec;
+    transform: rotate(90deg);
+}
+
+
+/* Header */
+
+.rsvp-header {
+    padding-right: 35px;
+    margin-bottom: 27px;
+}
+
+.rsvp-header h2 {
+    margin: 0 0 7px;
+
+    color: #182033;
+
+    font-size: 21px;
+    font-weight: 600;
+
+    letter-spacing: -0.3px;
+}
+
+.rsvp-header p {
+    margin: 0;
+
+    color: #8a91a1;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+}
+
+
+/* Field */
+
+.rsvp-field {
+    margin-bottom: 20px;
+}
+
+.rsvp-field > label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #424a5b;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+
+/* Name Input */
+
+#rsvpName {
+    width: 100%;
+
+    height: 47px;
+
+    box-sizing: border-box;
+
+    padding: 0 15px;
+
+    border: 1px solid #e0e2e7;
+
+    border-radius: 12px;
+
+    outline: none;
+
+    color: #333b4d;
+
+    background: #fff;
+
+    font-size: 13px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#rsvpName::placeholder {
+    color: #a4a9b5;
+}
+
+#rsvpName:focus {
+    border-color: #bfae9b;
+
+    box-shadow:
+        0 0 0 3px rgba(191, 174, 155, 0.12);
+}
+
+
+/* Attendance Options */
+
+.attendance-options {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+/* Option */
+
+.attendance-option {
+    width: 100%;
+
+    min-height: 56px;
+
+    padding: 8px 13px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    border: 1px solid #e9eaed;
+
+    border-radius: 12px;
+
+    background: #fbfbfc;
+
+    color: #465064;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        all 0.2s ease;
+}
+
+
+/* Icon */
+
+.attendance-icon {
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e7e9ed;
+
+    color: #687184;
+
+    font-size: 18px;
+
+    transition: all 0.2s ease;
+}
+
+
+/* Hover */
+
+.attendance-option:hover {
+    border-color: #d9d5cf;
+
+    background: #f8f7f5;
+}
+
+
+/* Selected */
+
+.attendance-option.selected {
+    border-color: #511419;
+
+    background: #faf7f3;
+
+    box-shadow:
+        0 3px 12px rgba(81, 20, 25, 0.08);
+}
+
+.attendance-option.selected .attendance-icon {
+    background: #511419;
+
+    color: white;
+}
+
+
+/* Submit */
+
+.rsvp-submit {
+    width: 100%;
+
+    height: 52px;
+
+    margin-top: 4px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #ece4d8;
+
+    color: #bba9a0;
+
+    font-family:
+        Baskerville,
+        "Times New Roman",
+        serif;
+
+    font-size: 15px;
+
+    cursor: not-allowed;
+
+    transition:
+        all 0.25s ease;
+}
+
+
+/* Enabled */
+
+.rsvp-submit:not(:disabled) {
+    background: #511419;
+
+    color: #ffffff;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(81, 20, 25, 0.18);
+}
+
+.rsvp-submit:not(:disabled):hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 10px 25px rgba(81, 20, 25, 0.25);
+}
+
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .rsvp-box {
+        width: calc(100% - 30px);
+
+        padding: 25px 18px 18px;
+
+        border-radius: 20px;
+    }
+
+    .rsvp-header h2 {
+        font-size: 20px;
+    }
+
+    .rsvp-header p {
+        font-size: 12.5px;
+    }
+
+}
+
+/* =========================================================
+   RSVP THANK YOU MESSAGE
+========================================================= */
+
+.rsvp-thank-you {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+
+    padding: 20px;
+}
+
+.rsvp-thank-you.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.rsvp-thank-you-box {
+    width: min(90%, 380px);
+
+    background: rgb(236, 228, 216);
+    color: rgb(81, 20, 25);
+
+    border-radius: 18px;
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25);
+
+    transform: scale(0.85) translateY(15px);
+
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.rsvp-thank-you.active .rsvp-thank-you-box {
+    transform: scale(1) translateY(0);
+}
+
+.thank-you-heart {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.rsvp-thank-you-box h3 {
+    margin: 0 0 10px;
+
+    font-family: Baskerville, 'Times New Roman', serif;
+
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.rsvp-thank-you-box p {
+    margin: 0;
+
+    font-family: Baskerville, 'Times New Roman', serif;
+
+    font-size: 15px;
+    line-height: 1.7;
+
+    color: rgba(81, 20, 25, 0.75);
+}
+
+/* =========================================================
+   AI WISH SUGGESTIONS MODAL
+========================================================= */
+
+.wish-suggestions-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+.wish-suggestions-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* Overlay */
+
+.wish-suggestions-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.35);
+}
+
+
+/* Box */
+
+.wish-suggestions-box {
+    position: relative;
+    z-index: 1;
+
+    width: min(100%, 440px);
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    padding: 22px 20px 20px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.25);
+
+    transform: translateY(20px) scale(0.96);
+
+    transition:
+        transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.wish-suggestions-modal.active
+.wish-suggestions-box {
+
+    transform: translateY(0) scale(1);
+}
+
+
+/* Header */
+
+.wish-suggestions-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.wish-suggestions-header h3 {
+    margin: 0;
+
+    color: #151b2b;
+
+    font-family:
+        Baskerville,
+        'Times New Roman',
+        serif;
+
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+/* Close X */
+
+.wish-suggestions-close {
+    flex-shrink: 0;
+
+    width: 30px;
+    height: 30px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f1f2f4;
+
+    color: #8c94a3;
+
+    font-size: 25px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.2s ease;
+}
+
+.wish-suggestions-close:hover {
+    background: #e5e7eb;
+}
+
+
+/* Subtitle */
+
+.wish-suggestions-subtitle {
+    margin: 12px 0 16px;
+
+    color: #697386;
+
+    font-family:
+        Baskerville,
+        'Times New Roman',
+        serif;
+
+    font-size: 14px;
+}
+
+
+/* Wishes List */
+
+.wish-suggestions-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+
+/* Wish Card */
+
+.wish-suggestion {
+    width: 100%;
+
+    border: 1px solid #dfe3e8;
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    padding: 16px;
+
+    text-align: left;
+
+    color: #354052;
+
+    font-family: "Baskerville" , "Times New Roman", serif;
+
+    font-size: 15px;
+    line-height: 1.65;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.wish-suggestion:hover {
+    border-color: #bda6a8;
+
+    background: #faf8f6;
+
+    transform: translateY(-1px);
+}
+
+.wish-suggestion:active {
+    transform: scale(0.99);
+}
+
+
+/* Bottom Close */
+
+.wish-suggestions-close-bottom {
+    width: 100%;
+
+    margin-top: 16px;
+
+    height: 43px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #e5e7eb;
+
+    color: #596273;
+
+    font-family:
+        Baskerville,
+        'Times New Roman',
+        serif;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.wish-suggestions-close-bottom:hover {
+    background: #d9dce1;
+}
+
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .wish-suggestions-modal {
+        padding: 12px;
+    }
+
+    .wish-suggestions-box {
+        max-height: 92vh;
+
+        padding: 20px 16px 16px;
+    }
+
+    .wish-suggestions-header h3 {
+        font-size: 18px;
+    }
+
+    .wish-suggestion {
+        padding: 14px;
+
+        font-size: 14px;
+    }
+
+}
+
+/* =========================================================
+   GUESTBOOK THANK YOU MESSAGE
+========================================================= */
+
+.wish-thank-you {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.35s ease,
+        visibility 0.35s ease;
+
+    padding: 20px;
+}
+
+.wish-thank-you.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.wish-thank-you-box {
+    width: min(90%, 380px);
+
+    background: rgb(236, 228, 216);
+    color: rgb(81, 20, 25);
+
+    border-radius: 18px;
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.25);
+
+    transform: scale(0.85) translateY(15px);
+
+    transition:
+        transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.wish-thank-you.active .wish-thank-you-box {
+    transform: scale(1) translateY(0);
+}
+
+.wish-thank-you .thank-you-heart {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.wish-thank-you-box h3 {
+    margin: 0 0 10px;
+
+    font-family:
+        Baskerville,
+        'Times New Roman',
+        serif;
+
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.wish-thank-you-box p {
+    margin: 0;
+
+    font-family:
+        Baskerville,
+        'Times New Roman',
+        serif;
+
+    font-size: 15px;
+    line-height: 1.7;
+
+    color: rgba(81, 20, 25, 0.75);
+}
