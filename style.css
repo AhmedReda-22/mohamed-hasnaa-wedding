@@ -3209,3 +3209,82 @@ HERO PHOTO - Natural layers (no cropping)
         opacity: 0.25 !important;
     }
 }
+
+/* =========================================
+   MOBILE FLOWERS FIX (ضبط أماكن الوردتين)
+========================================= */
+
+@media (max-width: 600px) {
+
+    /* تعديل الوردة اليمين (الفوق) - نرجعها لليمين ونزلها شوية تحت */
+    .flower-top-right {
+        width: 120px !important;
+        height: 200px !important;
+        top: 20px !important;
+        right: -40px !important;
+        transform: rotate(15deg) scaleY(-1) !important;
+        animation: float-flower-top 15s ease-in-out infinite !important;
+    }
+
+    /* تعديل الوردة الشمال (التحت) - نرجعها للشمال ونتأكد إنها باينة */
+    .flower-bottom-left {
+        width: 120px !important;
+        height: 200px !important;
+        bottom: 30px !important;
+        left: -50px !important;
+        transform: rotate(-15deg) scaleX(-1) scaleY(-1) !important;
+        animation: float-flower-bottom 16s ease-in-out infinite !important;
+    }
+}
+
+/* لو الشاشة أصغر من 400px (موبايل صغير جداً) */
+@media (max-width: 400px) {
+
+    .flower-top-right {
+        width: 100px !important;
+        height: 160px !important;
+        top: 15px !important;
+        right: -30px !important;
+    }
+
+    .flower-bottom-left {
+        width: 100px !important;
+        height: 160px !important;
+        bottom: 25px !important;
+        left: -40px !important;
+    }
+}
+
+/* =========================================================
+   MOBILE COLOR FIX (تفتيح اللون النبيتي للموبايل)
+========================================================= */
+
+@media (max-width: 600px) {
+
+    /* تفتيح لون الخلفية النبيتية الأساسية (الكارت الأحمر) */
+    .ceremony-bg,
+    .reception-card,
+    .rsvp-card,
+    .reception-card-new,
+    .ceremony-card {
+        background-color: #6b1c24 !important; /* ◄━━━ لون أغمق قليلاً لكنه أفتح من #511419 عشان يظهر بشكل أوضح */
+        /* أو لو حبيت تستخدم شفافية للصيانة: */
+        /* background-color: rgba(81, 20, 25, 0.9) !important; */
+    }
+
+    /* لو في مكان تاني بيستخدم نفس اللون كـ خلفية لكن بشكل صريح */
+    .ceremony-bg {
+        background-color: #6b1c24 !important;
+    }
+
+    /* ضبط لون النص عشان يظل واضح */
+    .ceremony-content .section-title.dark,
+    .reception-text,
+    .reception-names .reception-name,
+    .reception-names .reception-amp,
+    .rsvp-text,
+    .rsvp-btn {
+        color: #ece4d8 !important;
+    }
+
+}
