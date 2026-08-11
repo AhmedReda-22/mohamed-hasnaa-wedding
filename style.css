@@ -3203,13 +3203,6 @@ HERO PHOTO - Natural layers (no cropping)
     }
 }
 
-@media (max-width: 600px) {
-    .reception-card .reception-paper,
-    .reception-card > img {
-        opacity: 0.25 !important;
-    }
-}
-
 /* =========================================
    MOBILE FLOWERS FIX (ضبط أماكن الوردتين)
 ========================================= */
